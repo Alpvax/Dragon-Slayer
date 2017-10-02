@@ -1,14 +1,27 @@
+const CommandParser = require("jscommand").Parser;
+
 class GameState {
-    constructor (...handledEvents) {
-        this.handledEvents = handledEvents != undefined ? handledEvents : [];
-        this.player = null;
-        this.name = this.constructor.name + (this.constructor == GameState ? handledEvents : "");
+  constructor(...handledEvents) {
+    this.handledEvents = handledEvents != undefined ? handledEvents : [];
+    this.player = null;
+    this.name = this.constructor.name + (this.constructor == GameState ? handledEvents : "");
+    this.commandParser = null;
+  }
+  addCommand(command) {
+    if (this.commandParser == null) {
+      this.commandParser = new CommandParser(document.getElementById("input-text"));
     }
-    setPlayer (player) {
-        this.player = player;
+    this.commandParser.addCommand(command);
+  }
+  __runGameState(gameStateManager, ...args) {
+    if (this.commandParser != null) {
+      this.commandParser.activate();
     }
-    /*runState (gameStateManager, ...args) {
-    }*/
+    this.runState(gameStateManager, ...args);
+    if (this.commandParser != null) {
+      this.commandParser.deactivate();
+    }
+  }
 }
 
 module.exports = GameState;

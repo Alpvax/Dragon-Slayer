@@ -7,8 +7,19 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Trymunx",
+  "contributors": [
+    { "name" : "Alpvax",
+      "email" : "development.alpvax.uk"
+    }
+  ],
+  "repository": "Trymunx/Dragon-Slayer",
+  "bugs": "https://github.com/Trymunx/Dragon-Slayer/issues",
   "license": "MIT",
   "dependencies": {
-    "electron": "^1.7.5"
-  }
+    "electron": "^1.7.5",
+    "jscommand": "*"
+  },
+  "bundledDependencies": [
+    "jscommand"
+  ]
 }
