@@ -50,9 +50,10 @@ function endGameReport() {
               (Player.creaturesSlain.byType[key] === 1 ? CreatureDb[key].name : CreatureDb[key].namePlural));
           }
         }
+        var goldAmount = Player.inventory.getItem("gold") !== undefined ? Player.inventory.getItem("gold").quantity : "absolutely no";
         Output.addElement({
           "entity": "",
-          "content": "You slayed " + creaturesSlainOutput.join(", ") + " and earned " + Player.inventory.getItem("gold").quantity + " gold."
+          "content": "You slayed " + creaturesSlainOutput.join(", ") + " and earned " + goldAmount + " gold."
         });
       } else {
         Output.addElement({
