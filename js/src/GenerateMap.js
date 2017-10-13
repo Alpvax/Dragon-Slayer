@@ -110,7 +110,7 @@ function genMap(sideLength, edge, player) {
         position = (mapSize - 1) - Math.round(RNG(sideLength - 1));
         break;
       case "east":
-        position = (Math.round(RNG(sideLength)) * sideLength) - 1;
+        position = (Math.round(RNG(1, sideLength)) * sideLength) - 1;
         break;
       case "west":
         position = Math.round(RNG(sideLength - 1)) * sideLength;
