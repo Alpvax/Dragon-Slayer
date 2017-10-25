@@ -1,6 +1,7 @@
 /**Set up logging to terminal as well as chrome debug console */
 require("./js/src/utils/electron-console-setup.js")({chrome: true, node: true});
 
+require("jscommand").info(); //Display jscommand version
 const GameStateManager = require("./js/src/GameStates/GameStateManager.js");
 var gsm = new GameStateManager();
 //Autoload all: gsm.loadGameStates();
