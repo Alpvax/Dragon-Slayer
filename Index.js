@@ -1,12 +1,5 @@
-// const Input = require("./js/Input.js");
-// const Output = require("./js/Output.js");
-// const Map = require("./js/Map.js");
-
-
-// Run Game immediately
-/*const begin = require("./js/src/GameStateManager.js");
-
-begin();*/
+/**Set up logging to terminal as well as chrome debug console */
+require("./js/src/utils/electron-console-setup.js")({chrome: true, node: true});
 
 const GameStateManager = require("./js/src/GameStates/GameStateManager.js");
 var gsm = new GameStateManager();
