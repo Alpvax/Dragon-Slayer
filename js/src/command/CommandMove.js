@@ -8,3 +8,5 @@ class CommandMove extends Command {
 
     }
 }
+
+module.exports = CommandMove;

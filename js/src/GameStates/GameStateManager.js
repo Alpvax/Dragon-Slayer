@@ -8,6 +8,7 @@ const ENABLE_LOAD_STATE_DEBUG = false;
 class GameStateManager extends EventEmitter {
   constructor() {
     super();
+    this.activeState = null;
     this.loading = [];
   }
   loadGameStates(walkDir, recurse) {
@@ -26,15 +27,25 @@ class GameStateManager extends EventEmitter {
     return p;
   }
   register(gamestate) {
-    var activateGameState = (data) => gamestate.__runGameState(this, data);
+    var activateGameState = (data) => {
+      if(this.activeState && this.activeState.commandParser)
+      {
+        this.activeState.commandParser.deactivate();
+      }
+      this.activeState = gamestate;
+      gamestate.runState(this, data);
+      if (gamestate.commandParser != null) {
+        gamestate.commandParser.activate();
+      }
+    }
 
     var gsName = gamestate.name || gamestate;
     for (let handler of gamestate.handledEvents) {
-      let runArgs = [this];
-      if (typeof (handler) == "string") {
+      // Disabled additional args:
+      //if (typeof (handler) == "string") {
         if (ENABLE_LOAD_STATE_DEBUG) console.debug("Registering game state \"%s\" as a handler for \"%s\".", gsName, handler);
         this.on(handler, activateGameState);
-      } else {
+      /*} else {
         let key = handler.event;
         let val = handler.callback || handler.args;
         if (ENABLE_LOAD_STATE_DEBUG) console.debug("Registering game state \"%s\" as a handler for \"%s\" with arguments %O.", gsName, key, val);
@@ -43,7 +54,7 @@ class GameStateManager extends EventEmitter {
         } else {
           this.on(key, (data) => gamestate.__runGameState.apply(this, runArgs.concat(val, data)));
         }
-      }
+      }*/
     }
   }
   startGame() {

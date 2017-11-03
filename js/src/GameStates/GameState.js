@@ -9,11 +9,16 @@ class GameState {
   }
   addCommand(command) {
     if (this.commandParser == null) {
-      this.commandParser = new CommandParser(document.getElementById("input-text"));
+      this.commandParser = new CommandParser(document.getElementById("input-text")).deactivate();
     }
     this.commandParser.addCommand(command);
   }
-  __runGameState(gameStateManager, ...args) {
+  runState(gameStateManager, data)
+  {
+    console.log("This state does nothing!!");
+  }
+  /*__runGameState(gameStateManager, ...args) {
+    if(gameStateManager.stopState())
     if (this.commandParser != null) {
       this.commandParser.activate();
     }
@@ -21,7 +26,7 @@ class GameState {
     if (this.commandParser != null) {
       this.commandParser.deactivate();
     }
-  }
+  }*/
 }
 
 module.exports = GameState;

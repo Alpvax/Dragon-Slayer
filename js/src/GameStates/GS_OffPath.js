@@ -10,8 +10,11 @@ const DisplayInventory = require("../DisplayInventory.js");
 const RNG = require("../utils/RNG.js");
 const ItemDb = require("../../db/Items.json");
 
+//const CommandMove
+
 
 var GS_OffPath = new GameState("generated", "exitShop", "win", "run");
+GS_OffPath.addCommand(new (require("../command/CommandMove.js"))());
 var GameStateManager;
 
 var commands = [
@@ -105,8 +108,9 @@ function getInputAndParse(e) {
 GS_OffPath.runState = function (manager) {
   GameStateManager = manager;
   DrawMap(GameData.currentMap);
+  console.log(this);
   // Initialise above function
-  Input_Text.addEventListener("keydown", getInputAndParse);
+  //Input_Text.addEventListener("keydown", getInputAndParse);
 }
 
 module.exports = GS_OffPath;
